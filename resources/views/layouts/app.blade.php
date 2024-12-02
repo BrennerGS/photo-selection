@@ -12,6 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         
         <!-- add -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
         
         <!-- Scripts -->
@@ -31,7 +32,7 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="container">
                 {{ @$slot }}
                 @yield('content')
             </main>
