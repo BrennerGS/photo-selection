@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\CheckRoleAdmin;
 use App\Http\Middleware\CheckRoleCliente;
 use App\Http\Middleware\CheckRoleFotografo;
-
+use App\Http\Controllers\Foto_upload_controller;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,16 +25,22 @@ Route::get('/dashboard', function () {
 // });
 
 
-Route::middleware(['CheckRoleCliente'])->group(function () {
+Route::resource('foto_upload', Foto_upload_controller::class);
+
+Route::middleware([CheckRoleCliente::class, 'auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    
 });
 
 
 Route::get('/teste', function () {
     return view('welcome');
-})->middleware(['CheckRoleCliente::class']);
+})->middleware([CheckRoleCliente::class]);
+
+Route::get('/teste', )->middleware([CheckRoleCliente::class]);
 
 
 

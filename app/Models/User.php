@@ -37,6 +37,14 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function scopeClientes($query) { 
+        return $query->where('role', 'cliente'); 
+    } 
+    
+    public function scopeFotografos($query) { 
+        return $query->where('role', 'fotografo'); 
+    }
+
     /**
      * Get the attributes that should be cast.
      *
