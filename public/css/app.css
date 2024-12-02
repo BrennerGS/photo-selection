@@ -20,9 +20,9 @@
     display: flex;
     flex-direction: column; 
     align-items: center;
-    display: block; /* Necessário para o margin funcionar */
-  margin-left: auto; /* aqui */
-  margin-right: auto; /* e aqui */
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto; 
 }
     
 h1 {
@@ -102,4 +102,51 @@ form button:hover {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 200px;
+    max-width: 600px;
+    margin: 20px 0;
+    text-align: center;
+    
+}
+
+.card img {
+    width: 90%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content p {
+    
+    margin-left: auto; 
+    margin-right: auto; 
+    margin: 10px 0;
+    color: #555;
+}
+
+.card-content .button {
+    margin-top: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.card-content .button:hover {
+    background-color: #0056b3;
+}
+
 
