@@ -6,7 +6,10 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <div class="logo flex flex-col items-center"> 
+                            <img src="{{ asset('images/logo.png') }}" alt="Logo do Site" class="h-16 mb-2"> 
+                            <div class="text-sm text-gray-500" style="margin-top: -20px">Photo selection</div> 
+                        </div>
                     </a>
                 </div>
 

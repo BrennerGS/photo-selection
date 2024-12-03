@@ -44,12 +44,18 @@ class Foto_upload_controller extends Controller
         $user = Auth::user();
 
         if ($user->role == 'admin' || $user->role == 'fotografo') {
-            $validatedData = $request->validate([ 
+            $validatedData = $request->validate(
+            [ 
                 'cliente_id' => 'nullable|exists:users,id', 
                 'fotografo_id' => 'nullable|exists:users,id',
                 'foto_caminho' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'aprovacao' => 'required|boolean',
-            ]);
+                'aprovacao' => 'nullable|boolean',
+            ],
+            [
+                'foto_caminho.required' => 'A imagem é obrigatória.',
+                'aprovacao.boolean' => 'Erro de tipo de dados.',
+            ]
+            );
 
             if ($request->hasFile('foto_caminho')) {
                 $file = $request->file('foto_caminho');
@@ -102,8 +108,15 @@ class Foto_upload_controller extends Controller
                 'cliente_id' => 'nullable|exists:users,id', 
                 'fotografo_id' => 'nullable|exists:users,id',
                 'foto_caminho' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'aprovacao' => 'required|boolean',
-            ]);
+                'aprovacao' => 'boolean',
+            ],
+            [
+                'foto_caminho.image' => 'O arquivo deve ser uma imagem.',
+                'foto_caminho.mimes' => 'É permitido apenas arquivos do tipo jpeg,png,jpg,gif.',
+                'foto_caminho.max' => 'A imagem ultrapassa o máximo permitido que é 2048.',
+                'aprovacao.boolean' => 'Erro de tipo de dados',
+            ]
+            );
 
             if ($request->hasFile('foto_caminho')) {
                 $file = $request->file('foto_caminho');

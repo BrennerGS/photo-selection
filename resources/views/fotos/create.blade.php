@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Upload de Foto</h1>
-    <form action="{{ route('foto_upload.store') }}" method="POST" enctype="multipart/form-data">
+    <form class="form" action="{{ route('foto_upload.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <select name="cliente_id">
             <option value="">Selecione um cliente</option>
@@ -19,12 +19,17 @@
         </select>
 
         <input type="file" name="foto_caminho">
-        
+        @error('foto_caminho')
+            {{ $message }}
+        @enderror
         <select name="aprovacao">
             <option value="">Selecione a aprovação</option>
             <option value="1">Aprovado</option>
             <option value="0">Desaprovado</option>
         </select>
+        @error('aprovacao')
+            {{ $message }}
+        @enderror
 
         <button type="submit">Salvar</button>
     </form>

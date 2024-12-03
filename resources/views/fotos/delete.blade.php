@@ -3,7 +3,7 @@
 @section('content')
     <h1>Deletar Foto</h1>
     <p>Tem certeza que deseja deletar esta foto?</p>
-    <form action="{{ route('foto_upload.destroy', $foto->id) }}" method="POST">
+    <form class="form" action="{{ route('foto_upload.destroy', $foto->id) }}" method="POST">
         @csrf
         @method('DELETE')
         <button type="submit">Deletar</button>

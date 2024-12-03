@@ -5,7 +5,7 @@
     @if(Auth::user()->role == 'admin' || Auth::user()->role == 'fotografo')
         <a href="{{ route('foto_upload.create') }}" class="button">Adicionar Nova Foto</a>
     @endif
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
