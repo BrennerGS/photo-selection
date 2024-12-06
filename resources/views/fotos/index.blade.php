@@ -19,7 +19,7 @@
         <tbody>
             @foreach($fotos as $foto)
                 <tr>
-                    <td>{{ $foto->id }}</td>
+                    <td>{{ $foto->id }} </td>
                     <td>{{ $foto->cliente->name ?? 'N/A' }}</td>
                     <td>{{ $foto->fotografo->name ?? 'N/A' }}</td>
                     <td>
@@ -29,16 +29,16 @@
                     </td>
                     <td>{{ $foto->aprovacao ? 'Aprovado' : 'Desaprovado' }}</td>
                     <td>
-                        <a href="{{ route('foto_upload.show', $foto->id) }}" class="button">Ver</a>
+                        <a href="{{ route('foto_upload.show', App\Services\Operators::EncryptValue($foto->id)) }}" class="button">Ver</a>
                         @if(Auth::user()->role == 'admin' || Auth::user()->id == $foto->fotografo_id)
-                            <a href="{{ route('foto_upload.edit', $foto->id) }}" class="button">Editar</a>
-                            <form action="{{ route('foto_upload.destroy', $foto->id) }}" method="POST" style="display:inline;">
+                            <a href="{{ route('foto_upload.edit', App\Services\Operators::EncryptValue($foto->id)) }}" class="button">Editar</a>
+                            <form action="{{ route('foto_upload.destroy', App\Services\Operators::EncryptValue($foto->id)) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit">Deletar</button>
                             </form>
                         @elseif(Auth::user()->id == $foto->cliente_id)
-                            <form action="{{ route('foto_upload.update', $foto->id) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('foto_upload.update', App\Services\Operators::EncryptValue($foto->id)) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('PUT')
                                 <select name="aprovacao">

@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Editar Foto</h1>
-    <form class="form" action="{{ route('foto_upload.update', $foto->id) }}" method="POST" enctype="multipart/form-data">
+    <form class="form" action="{{ route('foto_upload.update', App\Services\Operators::EncryptValue($foto->id)) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <select name="cliente_id">

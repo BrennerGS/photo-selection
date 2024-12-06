@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\FotoUpload;
+use App\Services\Operators;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
@@ -73,7 +74,7 @@ class Foto_upload_controller extends Controller
 
     public function show($id)
     {
-        $foto = FotoUpload::findOrFail($id);
+        $foto = FotoUpload::findOrFail(Operators::DecryptValue($id));
         $user = Auth::user();
 
         if ($user->role == 'admin' || $user->id == $foto->cliente_id || $user->id == $foto->fotografo_id) {
@@ -85,7 +86,7 @@ class Foto_upload_controller extends Controller
 
     public function edit($id)
     {
-        $foto = FotoUpload::findOrFail($id);
+        $foto = FotoUpload::findOrFail(Operators::DecryptValue($id));
         $user = Auth::user();
 
         if ($user->role == 'admin' || $user->id == $foto->fotografo_id) {
@@ -100,7 +101,7 @@ class Foto_upload_controller extends Controller
 
     public function update(Request $request, $id)
     {
-        $foto = FotoUpload::findOrFail($id);
+        $foto = FotoUpload::findOrFail(Operators::DecryptValue($id));
         $user = Auth::user();
 
         if ($user->role == 'admin' || $user->id == $foto->fotografo_id) {
@@ -142,7 +143,7 @@ class Foto_upload_controller extends Controller
 
     public function destroy($id)
     {
-        $foto = FotoUpload::findOrFail($id);
+        $foto = FotoUpload::findOrFail(Operators::DecryptValue($id));
         $user = Auth::user();
 
         if ($user->role == 'admin' || $user->id == $foto->fotografo_id) {
