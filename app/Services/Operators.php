@@ -12,9 +12,9 @@ class Operators
         try {
             $descriptografado = Crypt::decrypt($value);
         } catch (DecryptException) {
-            //return redirect()->route('dashboard');
+            return redirect()->route('dashboard');
         }
-
+        
         return $descriptografado;
     }
 

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('foto_caminho')->nullable();
             $table->boolean('aprovacao')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

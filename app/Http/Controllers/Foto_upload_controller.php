@@ -6,11 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\FotoUpload;
 use App\Services\Operators;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
 class Foto_upload_controller extends Controller
-{
+{   
+
+    use SoftDeletes;
+
     public function index()
     {
         $user = Auth::user();
@@ -74,6 +78,8 @@ class Foto_upload_controller extends Controller
 
     public function show($id)
     {
+
+        
         $foto = FotoUpload::findOrFail(Operators::DecryptValue($id));
         $user = Auth::user();
 
@@ -141,18 +147,25 @@ class Foto_upload_controller extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy($id, $hardDelete = 0)
     {
         $foto = FotoUpload::findOrFail(Operators::DecryptValue($id));
         $user = Auth::user();
 
         if ($user->role == 'admin' || $user->id == $foto->fotografo_id) {
             // Apagar o arquivo de foto salvo no servidor
-            if ($foto->foto_caminho) {
-                Storage::disk('public')->delete($foto->foto_caminho);
-            }
+            
+            if($hardDelete == 1){
+                if ($foto->foto_caminho) {
+                    Storage::disk('public')->delete($foto->foto_caminho);
+                }
+    
+                $foto->forceDelete();
+            }else{
 
-            $foto->delete();
+                $foto->delete();
+            }
+            
 
             return redirect()->route('foto_upload.index')->with('success', 'Foto deletada com sucesso!');
         } else {
