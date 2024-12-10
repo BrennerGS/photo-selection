@@ -27,7 +27,15 @@
                             <img src="{{ asset('storage/' . $foto->foto_caminho) }}" alt="Foto" width="100">
                         </a>
                     </td>
-                    <td>{{ $foto->aprovacao ? 'Aprovado' : 'Desaprovado' }}</td>
+                    <td>
+                        @if ($foto->aprovacao == true)
+                            Aprovado
+                        @elseif($foto->aprovacao == null)
+                            Não escolhido
+                        @else
+                            Desaprovado
+                        @endif
+                    </td>
                     <td>
                         <a href="{{ route('foto_upload.show', App\Services\Operators::EncryptValue($foto->id)) }}" class="button">Ver</a>
                         @if(Auth::user()->role == 'admin' || Auth::user()->id == $foto->fotografo_id)
@@ -42,6 +50,7 @@
                                 @csrf
                                 @method('PUT')
                                 <select name="aprovacao">
+                                    
                                     <option value="1" {{ $foto->aprovacao ? 'selected' : '' }}>Aprovado</option>
                                     <option value="0" {{ !$foto->aprovacao ? 'selected' : '' }}>Desaprovado</option>
                                 </select>

@@ -115,7 +115,7 @@ class Foto_upload_controller extends Controller
                 'cliente_id' => 'nullable|exists:users,id', 
                 'fotografo_id' => 'nullable|exists:users,id',
                 'foto_caminho' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'aprovacao' => 'boolean',
+                'aprovacao' => 'nullable|boolean',
             ],
             [
                 'foto_caminho.image' => 'O arquivo deve ser uma imagem.',
